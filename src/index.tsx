@@ -4,6 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { initMsw } from '@/test/server';
+
+initMsw();
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
