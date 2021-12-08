@@ -1,15 +1,15 @@
-import React from 'react';
 import clsx from 'clsx';
 import { Fragment } from 'react';
 import { Menu, Popover, Transition } from '@headlessui/react';
 import { SearchIcon } from '@heroicons/react/solid';
-import { FireIcon, HomeIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
+import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import { NavLink } from 'react-router-dom';
 
 import { Link } from '@/components/Elements';
 import { MAIN_LINKS } from '@/constants';
+import { useAuth } from '@/hooks/useAuth';
 
-const user = {
+const dummyUser = {
   name: 'Chelsea Hagon',
   email: 'chelseahagon@example.com',
   imageUrl:
@@ -18,10 +18,12 @@ const user = {
 
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Log out', href: '#' },
 ];
 
 const MobilePopoverPanel = () => {
+  const { user } = useAuth();
+
   return (
     <Popover.Panel as="nav" className="lg:hidden" aria-label="Global">
       <div className="max-w-3xl mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-4">
@@ -44,11 +46,11 @@ const MobilePopoverPanel = () => {
       <div className="border-t border-gray-200 pt-4">
         <div className="max-w-3xl mx-auto px-4 flex items-center sm:px-6">
           <div className="flex-shrink-0">
-            <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
+            <img className="h-10 w-10 rounded-full" src={dummyUser.imageUrl} alt="" />
           </div>
           <div className="ml-3">
-            <div className="text-base font-medium text-gray-800">{user.name}</div>
-            <div className="text-sm font-medium text-gray-500">{user.email}</div>
+            <div className="text-base font-medium text-gray-800">{user?.username}</div>
+            <div className="text-sm font-medium text-gray-500">{user?.email}</div>
           </div>
         </div>
         <div className="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
@@ -188,7 +190,7 @@ export const MainHeader = () => {
                   <div>
                     <Menu.Button className="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                       <span className="sr-only">Open user menu</span>
-                      <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+                      <img className="h-8 w-8 rounded-full" src={dummyUser.imageUrl} alt="" />
                     </Menu.Button>
                   </div>
                   <ProfileMenu />

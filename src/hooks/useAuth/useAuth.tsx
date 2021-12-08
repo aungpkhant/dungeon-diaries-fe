@@ -8,7 +8,6 @@ import {
   LoginCredentialsDTO,
   getUser,
 } from '@/features/auth';
-import storage from '@/utils/storage';
 import { authReducer, initAuthState } from './authReducer';
 import { Spinner } from '@/components/Elements';
 
@@ -54,18 +53,17 @@ function useProvideAuth() {
   };
 
   const login = async (data: LoginCredentialsDTO) => {
-    const response = await loginWithEmailAndPassword(data);
-    storage.setToken(response.jwt);
+    const user = await loginWithEmailAndPassword(data);
+    dispatch({ type: 'OK/user', payload: user });
   };
 
   const register = async (data: RegisterCredentialsDTO) => {
-    const response = await registerWithEmailAndPassword(data);
-    storage.setToken(response.jwt);
+    const user = await registerWithEmailAndPassword(data);
+    dispatch({ type: 'OK/user', payload: user });
   };
 
   // const logout = () => {};
 
-  // TODO call GetUser on mount w/ react query
   useEffect(() => {
     loadUser();
   }, []);

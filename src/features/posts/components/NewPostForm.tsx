@@ -10,7 +10,7 @@ import { InputField, FileUploadField, TextAreaField } from '@/components/Form';
 
 const schema = z.object({
   title: z.string().min(1, 'Title is required'),
-  body: z.string().min(1, 'Body is required'),
+  content: z.string().min(1, 'Content is required'),
 });
 
 export function NewPostForm() {
@@ -30,9 +30,9 @@ export function NewPostForm() {
         error={methods.formState.errors['title']}
       />
       <TextAreaField
-        label="Body"
-        {...methods.register('body')}
-        error={methods.formState.errors['body']}
+        label="Content"
+        {...methods.register('content')}
+        error={methods.formState.errors['content']}
       />
       <FileUploadField />
       <div className="flex">

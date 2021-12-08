@@ -1,9 +1,9 @@
 import { useQuery } from 'react-query';
 
 import { axios } from '@/lib/axios';
-import { Post } from '../types';
+import { GetPosts } from '../types';
 
-export const getPosts = (): Promise<Post[]> => {
+export const getPosts = (): Promise<GetPosts> => {
   return axios.get('/posts');
 };
 

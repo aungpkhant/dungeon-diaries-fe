@@ -1,9 +1,10 @@
 import { Post } from './Post';
 import { Spinner } from '@/components/Elements';
 import { usePosts } from '../api/getPost';
+import { Heading } from '@/components/Elements';
 
 export const PostList = () => {
-  const { data: posts, isLoading } = usePosts();
+  const { data, isLoading } = usePosts();
 
   if (isLoading) {
     return (
@@ -13,7 +14,7 @@ export const PostList = () => {
     );
   }
 
-  if (!posts?.length) {
+  if (!data?.posts?.length) {
     return (
       <div className="bg-white rounded-lg shadow-sm w-full h-48 flex justify-center items-center text-gray-500 font-medium">
         -- Much Empty --
@@ -22,9 +23,10 @@ export const PostList = () => {
   }
 
   return (
-    <div className="space-y-6">
-      {posts.map((post) => (
-        <Post key={post.id} title={post.title} body={post.body} />
+    <div className="space-y-4 sm:space-y-6">
+      <Heading>Feed</Heading>
+      {data?.posts?.map((post) => (
+        <Post key={post.id} {...post} />
       ))}
     </div>
   );
