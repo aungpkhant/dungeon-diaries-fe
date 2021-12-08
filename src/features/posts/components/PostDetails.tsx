@@ -1,11 +1,11 @@
 import { Post } from './Post';
 import { Spinner } from '@/components/Elements';
-import { usePosts } from '../api/getPosts';
+import { usePost } from '../api/getPost';
 
-export const PostList = () => {
-  const { data, isLoading } = usePosts();
+export const PostDetails = ({ postId }: { postId: string }) => {
+  const { data, error, isLoading, isIdle, isError } = usePost(postId);
 
-  if (isLoading) {
+  if (isLoading || isIdle) {
     return (
       <div className="w-full h-48 flex justify-center items-center">
         <Spinner size="lg" />
@@ -13,19 +13,19 @@ export const PostList = () => {
     );
   }
 
-  if (!data?.posts?.length) {
+  if (isError || !data) {
     return (
       <div className="bg-white rounded-lg shadow-sm w-full h-48 flex justify-center items-center text-gray-500 font-medium">
-        -- Much Empty --
+        -- It's a dead end --
       </div>
     );
   }
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      {data?.posts?.map((post) => (
-        <Post key={post.id} {...post} />
-      ))}
+      <Post key={data.id} {...data} isClickableLink={false} />
+      {/* TODO Comment Form here */}
+      {/* TODO Comments Section here */}
     </div>
   );
 };

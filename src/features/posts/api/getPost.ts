@@ -1,15 +1,12 @@
 import { useQuery } from 'react-query';
 
 import { axios } from '@/lib/axios';
-import { GetPosts } from '../types';
+import { GetPost } from '../types';
 
-export const getPosts = (): Promise<GetPosts> => {
-  return axios.get('/posts');
+export const getPostById = (id: string): Promise<GetPost> => {
+  return axios.get(`/posts/${id}`);
 };
 
-export const usePosts = () => {
-  return useQuery({
-    queryKey: ['posts'],
-    queryFn: getPosts,
-  });
+export const usePost = (postId: string) => {
+  return useQuery(['post', postId], () => getPostById(postId));
 };

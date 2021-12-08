@@ -12,3 +12,5 @@ export type TPost = {
 export type GetPosts = {
   posts: TPost[];
 };
+
+export type GetPost = TPost;

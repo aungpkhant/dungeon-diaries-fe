@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import clsx from 'clsx';
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
@@ -11,6 +11,7 @@ import {
   StarIcon,
   ThumbUpIcon,
 } from '@heroicons/react/solid';
+import { useNavigate } from 'react-router';
 
 import { TPost } from '../types';
 import { formatDateTimeRelative } from '@/lib/dayjs';
@@ -31,7 +32,9 @@ const question = {
   href: '#',
 };
 
-type PostProps = TPost;
+type PostProps = TPost & {
+  isClickableLink?: boolean;
+};
 
 export const Post = ({
   author,
@@ -42,26 +45,38 @@ export const Post = ({
   votes,
   created_at,
   updated_at,
+  isClickableLink = true,
 }: PostProps) => {
+  const navigate = useNavigate();
+
+  const handleClick = isClickableLink
+    ? () => {
+        navigate(`/app/posts/${id}`);
+      }
+    : // eslint-disable-next-line @typescript-eslint/no-empty-function
+      () => {};
+
   return (
-    <>
-      <article className="bg-white shadow sm:rounded-lg p-6">
-        <div>
-          <div className="flex space-x-3">
-            <div className="flex-shrink-0">
-              <img className="h-10 w-10 rounded-full" src={question.author.imageUrl} alt="" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium text-gray-900">
-                <a href={question.author.href} className="hover:underline">
-                  {author}
-                </a>
-              </p>
-              <p className="text-sm text-gray-500">
-                <time dateTime={created_at}>{formatDateTimeRelative(created_at)}</time>
-              </p>
-            </div>
-            {/* <div className="flex-shrink-0 self-center flex">
+    <article
+      className={clsx('bg-white shadow sm:rounded-lg p-6', isClickableLink ? 'cursor-pointer' : '')}
+      onClick={handleClick}
+    >
+      <div>
+        <div className="flex space-x-3">
+          <div className="flex-shrink-0">
+            <img className="h-10 w-10 rounded-full" src={question.author.imageUrl} alt="" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-medium text-gray-900">
+              <a href={question.author.href} className="hover:underline">
+                {author}
+              </a>
+            </p>
+            <p className="text-sm text-gray-500">
+              <time dateTime={created_at}>{formatDateTimeRelative(created_at)}</time>
+            </p>
+          </div>
+          {/* <div className="flex-shrink-0 self-center flex">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
                   <Menu.Button className="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600">
@@ -128,28 +143,28 @@ export const Post = ({
                 </Transition>
               </Menu>
             </div> */}
-          </div>
-          <h2
-            id={'question-title-' + question.id}
-            className="mt-4 text-base font-medium text-gray-900"
-          >
-            {title}
-          </h2>
         </div>
-        <div className="mt-2 text-sm text-gray-700 space-y-4">{content}</div>
-        <div className="mt-6 flex justify-between space-x-8">
-          <div className="flex space-x-6">
-            <span className="inline-flex items-center text-sm">
-              <button
-                type="button"
-                className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
-              >
-                <ThumbUpIcon className="h-5 w-5" aria-hidden="true" />
-                <span className="font-medium text-gray-900">{votes}</span>
-                <span className="sr-only">likes</span>
-              </button>
-            </span>
-            {/* <span className="inline-flex items-center text-sm">
+        <h2
+          id={'question-title-' + question.id}
+          className="mt-4 text-base font-medium text-gray-900"
+        >
+          {title}
+        </h2>
+      </div>
+      <div className="mt-2 text-sm text-gray-700 space-y-4">{content}</div>
+      <div className="mt-6 flex justify-between space-x-8">
+        <div className="flex space-x-6">
+          <span className="inline-flex items-center text-sm">
+            <button
+              type="button"
+              className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
+            >
+              <ThumbUpIcon className="h-5 w-5" aria-hidden="true" />
+              <span className="font-medium text-gray-900">{votes}</span>
+              <span className="sr-only">likes</span>
+            </button>
+          </span>
+          {/* <span className="inline-flex items-center text-sm">
             <button
               type="button"
               className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
@@ -159,20 +174,19 @@ export const Post = ({
               <span className="sr-only">replies</span>
             </button>
           </span> */}
-          </div>
-          <div className="flex text-sm">
-            <span className="inline-flex items-center text-sm">
-              <button
-                type="button"
-                className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
-              >
-                <ShareIcon className="h-5 w-5" aria-hidden="true" />
-                <span className="font-medium text-gray-900">Share</span>
-              </button>
-            </span>
-          </div>
         </div>
-      </article>
-    </>
+        <div className="flex text-sm">
+          <span className="inline-flex items-center text-sm">
+            <button
+              type="button"
+              className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
+            >
+              <ShareIcon className="h-5 w-5" aria-hidden="true" />
+              <span className="font-medium text-gray-900">Share</span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </article>
   );
 };
