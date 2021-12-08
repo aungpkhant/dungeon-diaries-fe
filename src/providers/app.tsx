@@ -12,12 +12,12 @@ type AppProviderProps = {
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   return (
-    <ProvideAuth>
-      <QueryClientProvider client={queryClient}>
-        {process.env.NODE_ENV === 'development' && <ReactQueryDevtools />}
-        <Notifications />
-        <BrowserRouter>{children}</BrowserRouter>
-      </QueryClientProvider>
-    </ProvideAuth>
+    <QueryClientProvider client={queryClient}>
+      {process.env.NODE_ENV === 'development' && <ReactQueryDevtools />}
+      <Notifications />
+      <BrowserRouter>
+        <ProvideAuth>{children}</ProvideAuth>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 };

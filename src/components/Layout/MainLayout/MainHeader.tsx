@@ -16,13 +16,10 @@ const dummyUser = {
     'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 };
 
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Log out', href: '#' },
-];
+const userNavigation = [{ name: 'Your Profile', href: '#' }];
 
 const MobilePopoverPanel = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   return (
     <Popover.Panel as="nav" className="lg:hidden" aria-label="Global">
@@ -63,6 +60,12 @@ const MobilePopoverPanel = () => {
               {item.name}
             </a>
           ))}
+          <button
+            className="block text-left w-full rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+            onClick={logout}
+          >
+            Log out
+          </button>
         </div>
       </div>
 
@@ -76,6 +79,8 @@ const MobilePopoverPanel = () => {
 };
 
 const ProfileMenu = () => {
+  const { logout } = useAuth();
+
   return (
     <Transition
       as={Fragment}
@@ -102,6 +107,19 @@ const ProfileMenu = () => {
             )}
           </Menu.Item>
         ))}
+        <Menu.Item>
+          {({ active }) => (
+            <button
+              className={clsx(
+                active ? 'bg-gray-100' : '',
+                'w-full text-left block py-2 px-4 text-sm text-gray-700'
+              )}
+              onClick={logout}
+            >
+              Log out
+            </button>
+          )}
+        </Menu.Item>
       </Menu.Items>
     </Transition>
   );

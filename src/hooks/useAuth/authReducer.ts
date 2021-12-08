@@ -12,6 +12,9 @@ type ActionType =
   | {
       type: 'ERROR/user';
       payload: any;
+    }
+  | {
+      type: 'LOGOUT/user';
     };
 
 export const initAuthState: AuthState = {
@@ -20,7 +23,6 @@ export const initAuthState: AuthState = {
   error: null,
 };
 
-// TODO types for action
 export const authReducer = (state: AuthState, action: ActionType): AuthState => {
   switch (action.type) {
     case 'REQUEST/user':
@@ -44,6 +46,8 @@ export const authReducer = (state: AuthState, action: ActionType): AuthState => 
         error: action.payload,
         status: 'error',
       };
+    case 'LOGOUT/user':
+      return { ...initAuthState, status: 'idle' };
     default:
       throw new Error('Must provide valid action type');
   }
