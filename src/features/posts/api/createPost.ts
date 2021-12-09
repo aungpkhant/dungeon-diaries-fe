@@ -19,13 +19,13 @@ export const createPost = (data: CreatePostDTO): Promise<TPost> => {
 // TODO add onMutate, onError, onSuccess
 export const useCreatePost = () => {
   const navigate = useNavigate();
-  const { addNotifcation } = useNotificationStore();
+  const { addNotification } = useNotificationStore();
 
   return useMutation({
     mutationFn: createPost,
     onSuccess: () => {
       navigate('/app/feed');
-      addNotifcation({
+      addNotification({
         type: 'success',
         title: 'Post created',
       });

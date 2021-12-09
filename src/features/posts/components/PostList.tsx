@@ -3,9 +3,9 @@ import { Spinner } from '@/components/Elements';
 import { usePosts } from '../api/getPosts';
 
 export const PostList = () => {
-  const { data, isLoading } = usePosts();
+  const { data, isLoading, isIdle } = usePosts();
 
-  if (isLoading) {
+  if (isLoading || isIdle) {
     return (
       <div className="w-full h-48 flex justify-center items-center">
         <Spinner size="lg" />

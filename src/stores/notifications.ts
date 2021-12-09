@@ -11,14 +11,14 @@ export type TNotification = {
 
 type NotificationStore = {
   notifications: TNotification[];
-  addNotifcation: (notification: Omit<TNotification, 'id'>) => void;
+  addNotification: (notification: Omit<TNotification, 'id'>) => void;
   dismissNotification: (id: string) => void;
 };
 
 export const useNotificationStore = create<NotificationStore>(
   devtools((set) => ({
     notifications: [],
-    addNotifcation: (notification) =>
+    addNotification: (notification) =>
       set((state) => ({
         notifications: [...state.notifications, { id: nanoid(), ...notification }],
       })),
