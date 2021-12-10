@@ -45,6 +45,7 @@ export const Post = ({
   votes,
   created_at,
   updated_at,
+  comment_count,
   isClickableLink = true,
 }: PostProps) => {
   const navigate = useNavigate();
@@ -164,16 +165,16 @@ export const Post = ({
               <span className="sr-only">likes</span>
             </button>
           </span>
-          {/* <span className="inline-flex items-center text-sm">
+          <span className="inline-flex items-center text-sm">
             <button
               type="button"
               className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
             >
               <ChatAltIcon className="h-5 w-5" aria-hidden="true" />
-              <span className="font-medium text-gray-900">{question.replies}</span>
-              <span className="sr-only">replies</span>
+              <span className="font-medium text-gray-900">{comment_count}</span>
+              <span className="sr-only">comments</span>
             </button>
-          </span> */}
+          </span>
         </div>
         <div className="flex text-sm">
           <span className="inline-flex items-center text-sm">

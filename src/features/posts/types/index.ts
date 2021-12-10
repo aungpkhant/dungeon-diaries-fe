@@ -7,6 +7,7 @@ export type TPost = {
   votes: number;
   created_at: string;
   updated_at: string;
+  comment_count: number;
 };
 
 export type GetPosts = {

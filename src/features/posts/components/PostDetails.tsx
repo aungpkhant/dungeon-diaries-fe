@@ -1,6 +1,7 @@
 import { Post } from './Post';
 import { Spinner } from '@/components/Elements';
 import { usePost } from '../api/getPost';
+import { CommentForm, CommentsList } from '@/features/comments';
 
 export const PostDetails = ({ postId }: { postId: string }) => {
   const { data, error, isLoading, isIdle, isError } = usePost(postId);
@@ -24,8 +25,8 @@ export const PostDetails = ({ postId }: { postId: string }) => {
   return (
     <div className="space-y-4 sm:space-y-6">
       <Post key={data.id} {...data} isClickableLink={false} />
-      {/* TODO Comment Form here */}
-      {/* TODO Comments Section here */}
+      <CommentForm />
+      <CommentsList />
     </div>
   );
 };
