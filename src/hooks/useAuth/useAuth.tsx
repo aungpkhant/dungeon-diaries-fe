@@ -5,17 +5,19 @@ import {
   RegisterCredentialsDTO,
   registerWithEmailAndPassword,
   loginWithEmailAndPassword,
+  logout as logoutUser,
   LoginCredentialsDTO,
   getUser,
 } from '@/features/auth';
-import storage from '@/utils/storage';
 import { authReducer, initAuthState } from './authReducer';
 import { Spinner } from '@/components/Elements';
+import { useNavigate } from 'react-router';
 
 type AuthContextState = {
   user: null | AuthUser;
   register: (data: RegisterCredentialsDTO) => Promise<void>;
   login: (data: LoginCredentialsDTO) => Promise<void>;
+  logout: () => Promise<void>;
 };
 
 const AuthContext = createContext({} as AuthContextState);
@@ -42,6 +44,7 @@ export const useAuth = () => {
 
 function useProvideAuth() {
   const [authState, dispatch] = useReducer(authReducer, initAuthState);
+  const navigate = useNavigate();
 
   const loadUser = async () => {
     try {
@@ -54,18 +57,21 @@ function useProvideAuth() {
   };
 
   const login = async (data: LoginCredentialsDTO) => {
-    const response = await loginWithEmailAndPassword(data);
-    storage.setToken(response.jwt);
+    const user = await loginWithEmailAndPassword(data);
+    dispatch({ type: 'OK/user', payload: user });
   };
 
   const register = async (data: RegisterCredentialsDTO) => {
-    const response = await registerWithEmailAndPassword(data);
-    storage.setToken(response.jwt);
+    const user = await registerWithEmailAndPassword(data);
+    dispatch({ type: 'OK/user', payload: user });
   };
 
-  // const logout = () => {};
+  const logout = async () => {
+    await logoutUser();
+    dispatch({ type: 'LOGOUT/user' });
+    navigate('/');
+  };
 
-  // TODO call GetUser on mount w/ react query
   useEffect(() => {
     loadUser();
   }, []);
@@ -75,6 +81,6 @@ function useProvideAuth() {
     isFetching: authState.status === 'loading',
     login,
     register,
-    // logout,
+    logout,
   };
 }
