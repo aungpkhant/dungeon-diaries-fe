@@ -23,17 +23,12 @@ export function NewPostForm() {
   const newPostSubmit = async (data: any) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
-    // console.log(data);
-    // console.log(data?.image);
     const { image, ...postData } = data;
     if (image?.[0]) {
-      console.log(image?.[0].name);
-
       const content_type = image?.[0].name.split('.').pop();
 
       // Upload to S3
       const preSignedUrlData = await getPresignedUrl(content_type);
-      console.log(preSignedUrlData);
 
       const s3XmlResponse = await uploadFileToS3(
         preSignedUrlData.url,
