@@ -12,6 +12,7 @@ import {
   ThumbUpIcon,
 } from '@heroicons/react/solid';
 import { useNavigate } from 'react-router';
+import { SRLWrapper } from 'simple-react-lightbox';
 
 import { TPost } from '../types';
 import { formatDateTimeRelative } from '@/lib/dayjs';
@@ -42,6 +43,7 @@ export const Post = ({
   author_id,
   title,
   content,
+  image,
   votes,
   created_at,
   updated_at,
@@ -145,14 +147,26 @@ export const Post = ({
               </Menu>
             </div> */}
         </div>
-        <h2
-          id={'question-title-' + question.id}
-          className="mt-4 text-base font-medium text-gray-900"
-        >
+        <h2 id={'question-title-' + question.id} className="mt-4 text-lg font-medium text-gray-900">
           {title}
         </h2>
       </div>
-      <div className="mt-2 text-sm text-gray-700 space-y-4">{content}</div>
+      {Boolean(image) && (
+        <SRLWrapper>
+          <div className="-mx-6 my-4 flex justify-center">
+            <img
+              className="max-w-full cursor-pointer"
+              style={{
+                maxHeight: '512px',
+              }}
+              src={image}
+              alt=""
+              onClick={(e) => e?.stopPropagation()}
+            />
+          </div>
+        </SRLWrapper>
+      )}
+      <div className="mt-2 text-md text-gray-600 space-y-4">{content}</div>
       <div className="mt-6 flex justify-between space-x-8">
         <div className="flex space-x-6">
           <span className="inline-flex items-center text-sm">

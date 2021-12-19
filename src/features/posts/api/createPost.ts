@@ -9,6 +9,8 @@ export type CreatePostDTO = {
   data: {
     title: string;
     content: string;
+    key?: string;
+    location?: string;
   };
 };
 

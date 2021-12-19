@@ -4,6 +4,7 @@ export type TPost = {
   id: number;
   title: string;
   content: string;
+  image: string;
   votes: number;
   created_at: string;
   updated_at: string;
