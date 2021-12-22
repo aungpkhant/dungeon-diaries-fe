@@ -54,7 +54,7 @@ export const Register = () => {
           id="new-password"
           type="password"
         />
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" isLoading={methods.formState.isSubmitting}>
           Register
         </Button>
       </form>

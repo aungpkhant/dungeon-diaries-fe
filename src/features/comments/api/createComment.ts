@@ -4,6 +4,7 @@ import { queryClient } from '@/lib/react-query';
 
 import { useNotificationStore } from '@/stores/notifications';
 import { TComment } from '../types';
+import { TPost } from '@/features/posts';
 
 export type CreateCommentDTO = {
   postId: string;
@@ -23,12 +24,24 @@ export const useCreateComment = () => {
 
   return useMutation({
     mutationFn: createComment,
-    onSuccess: () => {
+    onSuccess: (_, { postId }) => {
       addNotification({
         type: 'success',
         title: 'Comment created',
       });
-      // TODO could do better here and invalidate comments specific for the post
+
+      queryClient.setQueryData<TPost | undefined>(['post', postId], (cachedPost) => {
+        console.log(cachedPost);
+        if (cachedPost === undefined) {
+          return undefined;
+        }
+
+        return {
+          ...cachedPost,
+          comment_count: `${parseInt(cachedPost.comment_count, 10) + 1}`,
+        };
+      });
+
       queryClient.invalidateQueries('comments');
     },
   });

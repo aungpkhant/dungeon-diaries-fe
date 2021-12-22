@@ -49,7 +49,7 @@ export const Login = () => {
           id="current-password"
         />
         <div>
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" isLoading={methods.formState.isSubmitting}>
             Log in
           </Button>
         </div>

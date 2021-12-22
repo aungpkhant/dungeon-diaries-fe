@@ -6,9 +6,10 @@ export type TPost = {
   content: string;
   image: string;
   votes: number;
+  user_vote: -1 | 0 | 1;
   created_at: string;
   updated_at: string;
-  comment_count: number;
+  comment_count: string;
 };
 
 export type GetPosts = {
@@ -16,3 +17,9 @@ export type GetPosts = {
 };
 
 export type GetPost = TPost;
+
+export type VotePost = {
+  post_id: number;
+  votes: number;
+  user_vote: TPost['user_vote'];
+};

@@ -5,6 +5,7 @@ import { Spinner } from '..';
 const variants = {
   primary: 'text-white bg-indigo-600 hover:bg-indigo-700',
   secondary: 'text-indigo-700 bg-indigo-100 hover:bg-indigo-200',
+  ghost: 'text-gray-400 hover:text-indigo-500',
   custom: '',
 };
 
@@ -37,6 +38,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       className = '',
       startIcon,
       endIcon,
+      disabled,
       ...props
     },
     ref
@@ -46,11 +48,12 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={type}
         className={clsx(
-          'inline-flex items-center justify-center font-medium',
+          'inline-flex items-center justify-center font-medium disabled:opacity-60 disabled:cursor-not-allowed',
           variants[variant],
           sizes[size],
           className
         )}
+        disabled={isLoading || disabled}
         {...props}
       >
         {isLoading && <Spinner size="sm" className="mr-2 text-current" variant="inherit" />}

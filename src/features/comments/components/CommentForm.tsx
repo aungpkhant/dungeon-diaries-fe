@@ -9,17 +9,22 @@ import { useParams } from 'react-router';
 
 const schema = z.object({
   content: z.string().min(1, 'Content is required').max(1000, 'Maximum 1000 characters'),
+  parentCommentId: z.number().nullable(),
 });
-// parentCommentId: z.number().nullable(),
 
-export const CommentForm = () => {
+type CommentFormProps = {
+  parentCommentId?: null | number;
+  closeReplyTextBox?: () => void;
+};
+
+export const CommentForm = ({ parentCommentId = null, closeReplyTextBox }: CommentFormProps) => {
   const { mutate, isLoading } = useCreateComment();
   const { postId } = useParams();
 
   const methods = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      parentCommentId: null,
+      parentCommentId,
       content: '',
     },
   });
@@ -32,6 +37,7 @@ export const CommentForm = () => {
           // Improvement: scroll to new comment after successful post
           onSuccess: () => {
             methods.reset();
+            closeReplyTextBox?.();
           },
         }
       );
