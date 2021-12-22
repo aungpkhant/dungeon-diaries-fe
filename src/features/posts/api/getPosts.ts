@@ -9,7 +9,7 @@ export const getPosts = (): Promise<GetPosts> => {
 
 export const usePosts = () => {
   return useQuery({
-    queryKey: ['posts'],
+    queryKey: 'posts',
     queryFn: getPosts,
   });
 };

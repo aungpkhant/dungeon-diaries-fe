@@ -1,8 +1,17 @@
 import { TCommentNested } from '../../types';
 import { formatDateTimeRelative } from '@/lib/dayjs';
+import { useToggle } from '@/hooks/useToggle';
+
+import { CommentForm } from '..';
 import { CommentActionBar } from './CommentActionBar';
 
-export const Comment = ({ comment }: { comment: TCommentNested }) => {
+type CommentProps = {
+  comment: TCommentNested;
+};
+
+export const Comment = ({ comment }: CommentProps) => {
+  const { isOpen: isReplying, toggle: toggleReplying, close: closeReplyTextBox } = useToggle(false);
+
   const NestedComments = (comment.child_comments || []).map((child) => {
     return <Comment key={child.id} comment={child} />;
   });
@@ -29,7 +38,10 @@ export const Comment = ({ comment }: { comment: TCommentNested }) => {
         <span className="absolute left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
         <div className=" mb-4 mt-2 ml-3">
           <p className="text-gray-700">{comment.content}</p>
-          <CommentActionBar />
+          <CommentActionBar handleReplyButtonClick={toggleReplying} />
+          {isReplying && (
+            <CommentForm parentCommentId={comment.id} closeReplyTextBox={closeReplyTextBox} />
+          )}
         </div>
         {NestedComments}
       </div>
