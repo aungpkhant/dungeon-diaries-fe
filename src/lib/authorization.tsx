@@ -14,6 +14,12 @@ export enum ROLES {
 type RoleTypes = keyof typeof ROLES;
 
 export const POLICIES = {
+  owner: (user: AuthUser | null, entityId: number | string) => {
+    if (!user) {
+      return false;
+    }
+    return `${user.id}` === `${entityId}`;
+  },
   'comment:delete': (user: AuthUser, comment: TComment) => {
     // if (user.role === 'ADMIN') {
     //   return true;

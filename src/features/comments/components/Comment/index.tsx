@@ -1,14 +1,15 @@
+import clsx from 'clsx';
+
 import { TCommentNested } from '../../types';
 import { formatDateTimeRelative } from '@/lib/dayjs';
 import { useToggle } from '@/hooks/useToggle';
 import { POLICIES, Authorization } from '@/lib/authorization';
 import { useAuth } from '@/hooks/useAuth';
-
 import { CommentForm } from '..';
 import { CommentActionBar } from './CommentActionBar';
 import { CommentKebabMenu } from './CommentKebabMenu';
 import { AuthUser } from '@/features/auth';
-import clsx from 'clsx';
+import { Badge } from '@/components/Elements';
 
 type CommentProps = {
   comment: TCommentNested;
@@ -35,7 +36,14 @@ export const Comment = ({ comment }: CommentProps) => {
             />
           </div>
           <div className="flex-1 ml-3">
-            <div className="font-medium text-gray-900">{comment.author}</div>
+            <div className="font-medium text-gray-900">
+              {comment.author}
+              <Authorization policyCheck={POLICIES['owner'](user, comment.author_id)}>
+                <span className="ml-2">
+                  <Badge>Me</Badge>
+                </span>
+              </Authorization>
+            </div>
             <div>{formatDateTimeRelative(comment.created_at)}</div>
           </div>
           <Authorization policyCheck={POLICIES['comment:delete'](user as AuthUser, comment)}>

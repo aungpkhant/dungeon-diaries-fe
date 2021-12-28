@@ -15,7 +15,7 @@ const schema = z.object({
 });
 
 export function NewPostForm() {
-  const { mutate, isLoading } = useCreatePost();
+  const { mutate } = useCreatePost();
   const methods = useForm({ resolver: zodResolver(schema) });
 
   // TODO limit filesize?
@@ -69,7 +69,7 @@ export function NewPostForm() {
         error={methods.formState.errors['image']}
       />
       <div className="flex">
-        <Button className="ml-auto" type="submit" isLoading={isLoading}>
+        <Button className="ml-auto" type="submit" isLoading={methods.formState.isSubmitting}>
           Publish
         </Button>
       </div>

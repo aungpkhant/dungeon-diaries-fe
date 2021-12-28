@@ -41,7 +41,7 @@ export const Post = ({
       onClick={handleClick}
     >
       <div>
-        <PostAuthorMetaData author={author} created_at={created_at} />
+        <PostAuthorMetaData author={author} author_id={author_id} created_at={created_at} />
         <h2 className="mt-4 text-lg font-medium text-gray-900">{title}</h2>
       </div>
       {Boolean(image) && (
