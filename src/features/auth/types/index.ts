@@ -1,7 +1,7 @@
-type UserRole = null | 'admin' | 'moderator';
+type UserRole = 'ADMIN' | 'MODERATOR' | 'USER';
 
 export type AuthUser = {
-  id: string;
+  id: number;
   email: string;
   username: string;
   role: UserRole;

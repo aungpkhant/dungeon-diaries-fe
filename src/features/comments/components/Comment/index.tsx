@@ -1,15 +1,21 @@
 import { TCommentNested } from '../../types';
 import { formatDateTimeRelative } from '@/lib/dayjs';
 import { useToggle } from '@/hooks/useToggle';
+import { POLICIES, Authorization } from '@/lib/authorization';
+import { useAuth } from '@/hooks/useAuth';
 
 import { CommentForm } from '..';
 import { CommentActionBar } from './CommentActionBar';
+import { CommentKebabMenu } from './CommentKebabMenu';
+import { AuthUser } from '@/features/auth';
+import clsx from 'clsx';
 
 type CommentProps = {
   comment: TCommentNested;
 };
 
 export const Comment = ({ comment }: CommentProps) => {
+  const { user } = useAuth();
   const { isOpen: isReplying, toggle: toggleReplying, close: closeReplyTextBox } = useToggle(false);
 
   const NestedComments = (comment.child_comments || []).map((child) => {
@@ -32,12 +38,17 @@ export const Comment = ({ comment }: CommentProps) => {
             <div className="font-medium text-gray-900">{comment.author}</div>
             <div>{formatDateTimeRelative(comment.created_at)}</div>
           </div>
+          <Authorization policyCheck={POLICIES['comment:delete'](user as AuthUser, comment)}>
+            <div className="flex-shrink-0 self-center flex">
+              <CommentKebabMenu commentId={comment.id} />
+            </div>
+          </Authorization>
         </div>
       </div>
       <div className="pl-10 relative">
         <span className="absolute left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
         <div className=" mb-4 mt-2 ml-3">
-          <p className="text-gray-700">{comment.content}</p>
+          <p className={clsx('text-gray-700', comment.deleted_at && 'italic')}>{comment.content}</p>
           <CommentActionBar handleReplyButtonClick={toggleReplying} />
           {isReplying && (
             <CommentForm parentCommentId={comment.id} closeReplyTextBox={closeReplyTextBox} />

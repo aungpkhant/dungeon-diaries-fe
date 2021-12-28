@@ -5,6 +5,7 @@ export type TComment = {
   content: string;
   created_at: string;
   updated_at: string;
+  deleted_at: string;
   depth: number;
   lineage: string;
 };
