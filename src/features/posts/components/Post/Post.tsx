@@ -59,7 +59,9 @@ export const Post = ({
           </div>
         </SRLWrapper>
       )}
-      <div className="mt-2 text-md text-gray-600 space-y-4">{content}</div>
+      <div className="mt-2 space-y-4">
+        <p className="text-gray-600 text-md whitespace-pre-wrap">{content}</p>
+      </div>
       <div className="mt-6 flex justify-between">
         <PostActionBarLeft
           id={id}
