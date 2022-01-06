@@ -24,6 +24,7 @@ export const Post = ({
   updated_at,
   user_vote,
   comment_count,
+  author_profile_image,
   isClickableLink = true,
 }: PostProps) => {
   const navigate = useNavigate();
@@ -41,7 +42,12 @@ export const Post = ({
       onClick={handleClick}
     >
       <div>
-        <PostAuthorMetaData author={author} author_id={author_id} created_at={created_at} />
+        <PostAuthorMetaData
+          author={author}
+          author_id={author_id}
+          author_profile_image={author_profile_image}
+          created_at={created_at}
+        />
         <h2 className="mt-4 text-lg font-medium text-gray-900">{title}</h2>
       </div>
       {Boolean(image) && (

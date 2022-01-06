@@ -5,6 +5,7 @@ import { Spinner } from '..';
 const variants = {
   primary: 'text-white bg-indigo-600 hover:bg-indigo-700',
   secondary: 'text-indigo-700 bg-indigo-100 hover:bg-indigo-200',
+  danger: 'text-red-800 bg-red-100 hover:bg-red-200',
   ghost: 'text-gray-400 hover:text-indigo-500',
   custom: '',
 };

@@ -9,13 +9,6 @@ import { Link } from '@/components/Elements';
 import { MAIN_LINKS } from '@/constants';
 import { useAuth } from '@/hooks/useAuth';
 
-const dummyUser = {
-  name: 'Chelsea Hagon',
-  email: 'chelseahagon@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-};
-
 const userNavigation = [{ name: 'Your Profile', href: '#' }];
 
 const MobilePopoverPanel = () => {
@@ -43,7 +36,11 @@ const MobilePopoverPanel = () => {
       <div className="border-t border-gray-200 pt-4">
         <div className="max-w-3xl mx-auto px-4 flex items-center sm:px-6">
           <div className="flex-shrink-0">
-            <img className="h-10 w-10 rounded-full" src={dummyUser.imageUrl} alt="" />
+            <img
+              className="h-10 w-10 rounded-full"
+              src={user?.profile_image ?? '/assets/default_profile.png'}
+              alt=""
+            />
           </div>
           <div className="ml-3">
             <div className="text-base font-medium text-gray-800">{user?.username}</div>
@@ -182,6 +179,8 @@ const HomeIconSection = () => {
 
 export const MainHeader = () => {
   /* When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars */
+  const { user } = useAuth();
+
   return (
     <Popover
       as="header"
@@ -205,7 +204,11 @@ export const MainHeader = () => {
                   <div>
                     <Menu.Button className="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                       <span className="sr-only">Open user menu</span>
-                      <img className="h-8 w-8 rounded-full" src={dummyUser.imageUrl} alt="" />
+                      <img
+                        className="h-8 w-8 rounded-full bg-gray-200"
+                        src={user?.profile_image ?? '/assets/default_profile.png'}
+                        alt=""
+                      />
                     </Menu.Button>
                   </div>
                   <ProfileMenu />

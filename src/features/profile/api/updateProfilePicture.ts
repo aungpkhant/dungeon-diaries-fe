@@ -4,24 +4,27 @@ import { queryClient } from '@/lib/react-query';
 
 import { useNotificationStore } from '@/stores/notifications';
 import { AuthUser } from '@/features/auth';
+import { useAuth } from '@/hooks/useAuth';
 
-export type UpdateProfileDTO = {
-  bio: string;
+export type UpdateProfileImageDTO = {
+  key: string;
+  location: string;
 };
 
-export const updateProfile = (data: UpdateProfileDTO): Promise<AuthUser> => {
-  return axios.put('/users/me', data);
+export const updateProfileImage = (data: UpdateProfileImageDTO): Promise<AuthUser> => {
+  return axios.put('/users/my-profile-image', data);
 };
 
-export const useUpdateProfile = () => {
+export const useUpdateProfileImage = () => {
   const { addNotification } = useNotificationStore();
+  const { updateUser } = useAuth();
 
   return useMutation({
-    mutationFn: updateProfile,
+    mutationFn: updateProfileImage,
     onSuccess: (data) => {
       addNotification({
         type: 'success',
-        title: 'Profile updated',
+        title: 'Profile picture updated',
       });
 
       // TODO Update frontend caches
@@ -29,8 +32,10 @@ export const useUpdateProfile = () => {
         if (cachedProfile === undefined) {
           return undefined;
         }
-        return data;
+        return { ...data };
       });
+
+      updateUser(data);
     },
   });
 };

@@ -1,6 +1,7 @@
 export type TComment = {
   author: string;
   author_id: number;
+  author_profile_image: string | null;
   id: number;
   content: string;
   created_at: string;

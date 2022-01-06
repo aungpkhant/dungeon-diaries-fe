@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, createContext, useReducer } from 'react';
+import React, { useEffect, useContext, createContext, useReducer } from 'react';
 
 import { AuthUser } from '@/features/auth/types';
 import {
@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router';
 
 type AuthContextState = {
   user: null | AuthUser;
+  updateUser: (userFields: Partial<AuthUser>) => void;
   register: (data: RegisterCredentialsDTO) => Promise<void>;
   login: (data: LoginCredentialsDTO) => Promise<void>;
   logout: () => Promise<void>;
@@ -45,6 +46,10 @@ export const useAuth = () => {
 function useProvideAuth() {
   const [authState, dispatch] = useReducer(authReducer, initAuthState);
   const navigate = useNavigate();
+
+  const updateUser = (userFields: Partial<AuthUser>) => {
+    dispatch({ type: 'UPDATE/user', payload: userFields });
+  };
 
   const loadUser = async () => {
     try {
@@ -79,6 +84,7 @@ function useProvideAuth() {
   return {
     user: authState.user,
     isFetching: authState.status === 'loading',
+    updateUser,
     login,
     register,
     logout,
