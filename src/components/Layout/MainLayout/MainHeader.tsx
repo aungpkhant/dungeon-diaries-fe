@@ -51,15 +51,12 @@ const MobilePopoverPanel = () => {
           </div>
         </div>
         <div className="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
-          {userNavigation.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-            >
-              {item.name}
-            </a>
-          ))}
+          <Link
+            to={`/app/profile/${user?.id}`}
+            className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+          >
+            Your Profile
+          </Link>
           <button
             className="block text-left w-full rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
             onClick={logout}
@@ -79,7 +76,7 @@ const MobilePopoverPanel = () => {
 };
 
 const ProfileMenu = () => {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
 
   return (
     <Transition
@@ -95,15 +92,15 @@ const ProfileMenu = () => {
         {userNavigation.map((item) => (
           <Menu.Item key={item.name}>
             {({ active }) => (
-              <a
-                href={item.href}
+              <Link
+                to={`/app/profile/${user?.id}`}
                 className={clsx(
                   active ? 'bg-gray-100' : '',
-                  'block py-2 px-4 text-sm text-gray-700'
+                  'w-full text-left block py-2 px-4 text-sm text-gray-700'
                 )}
               >
-                {item.name}
-              </a>
+                Your Profile
+              </Link>
             )}
           </Menu.Item>
         ))}
