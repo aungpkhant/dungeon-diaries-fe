@@ -7,4 +7,6 @@ export type AuthUser = {
   role: UserRole;
   created_at: string;
   updated_at: string;
+  bio: string;
+  profile_image: string;
 };

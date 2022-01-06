@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
 
 import { TCommentNested } from '../../types';
 import { formatDateTimeRelative } from '@/lib/dayjs';
@@ -29,15 +30,15 @@ export const Comment = ({ comment }: CommentProps) => {
         <div className="flex items-center">
           <div className="flex-shrink-0">
             <img
-              className="h-10 w-10 rounded-full bg-gray-400 flex items-center justify-center"
-              src={
-                'https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80'
-              }
+              className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center"
+              src={comment.author_profile_image ?? '/assets/default_profile.png'}
             />
           </div>
           <div className="flex-1 ml-3">
             <div className="font-medium text-gray-900">
-              {comment.author}
+              <Link to={`/app/profile/${comment.author_id}`} className="hover:underline">
+                {comment.author}
+              </Link>
               <Authorization policyCheck={POLICIES['owner'](user, comment.author_id)}>
                 <span className="ml-2">
                   <Badge>Me</Badge>

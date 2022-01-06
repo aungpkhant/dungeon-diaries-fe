@@ -7,6 +7,7 @@ type AuthState = {
 };
 
 type ActionType =
+  | { type: 'UPDATE/user'; payload: Partial<AuthUser> }
   | { type: 'REQUEST/user' }
   | { type: 'OK/user'; payload: AuthUser }
   | {
@@ -25,6 +26,15 @@ export const initAuthState: AuthState = {
 
 export const authReducer = (state: AuthState, action: ActionType): AuthState => {
   switch (action.type) {
+    case 'UPDATE/user':
+      return {
+        ...state,
+        // @ts-ignore
+        user: {
+          ...state.user,
+          ...action.payload,
+        },
+      };
     case 'REQUEST/user':
       return {
         ...state,

@@ -1,6 +1,7 @@
 export type TPost = {
   author: string;
   author_id: number;
+  author_profile_image: string | null;
   id: number;
   title: string;
   content: string;

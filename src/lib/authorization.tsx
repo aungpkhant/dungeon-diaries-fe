@@ -14,8 +14,8 @@ export enum ROLES {
 type RoleTypes = keyof typeof ROLES;
 
 export const POLICIES = {
-  owner: (user: AuthUser | null, entityId: number | string) => {
-    if (!user) {
+  owner: (user: AuthUser | null, entityId: number | string | null | undefined) => {
+    if (!user || !entityId) {
       return false;
     }
     return `${user.id}` === `${entityId}`;

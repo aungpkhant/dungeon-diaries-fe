@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { formatDateTimeRelative } from '@/lib/dayjs';
 import { TPost } from '../../types';
 import { Authorization, POLICIES } from '@/lib/authorization';
@@ -11,19 +13,28 @@ export const PostAuthorMetaData = ({
   author,
   author_id,
   created_at,
-}: Pick<TPost, 'author' | 'author_id' | 'created_at'>) => {
+  author_profile_image,
+}: Pick<TPost, 'author' | 'author_id' | 'created_at' | 'author_profile_image'>) => {
   const { user } = useAuth();
 
   return (
     <div className="flex space-x-3">
       <div className="flex-shrink-0">
-        <img className="h-12 w-12 rounded-full" src={dummyAuthorImageUrl} alt="" />
+        <img
+          className="h-12 w-12 rounded-full bg-gray-200"
+          src={author_profile_image ?? '/assets/default_profile.png'}
+          alt=""
+        />
       </div>
       <div className="min-w-0 flex-1">
         <p className="text-base font-medium text-gray-900">
-          <a href={'#'} className="hover:underline">
+          <Link
+            to={`/app/profile/${author_id}`}
+            className="hover:underline"
+            onClick={(e) => e.stopPropagation()}
+          >
             {author}
-          </a>
+          </Link>
           <Authorization policyCheck={POLICIES.owner(user, author_id)}>
             <span className="ml-2">
               <Badge>Me</Badge>
