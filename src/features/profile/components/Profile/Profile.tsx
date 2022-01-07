@@ -33,14 +33,14 @@ export const Profile = ({ userProfile, isEditingProfile }: ProfileProps) => {
 
   const handleImageChange = async () => {
     // TODO refactor DRY
-    setIsUploading(true);
-
     // Update image optmistically
     const image = profileImageUploadInputRef.current?.files?.[0];
 
     if (!image) {
       return;
     }
+
+    setIsUploading(true);
 
     // Call upload intent
     const content_type = image.name.split('.').pop();
@@ -113,7 +113,7 @@ export const Profile = ({ userProfile, isEditingProfile }: ProfileProps) => {
           {isEditingProfile ? (
             <TextAreaField label="Write something about yourself" {...register('bio')} />
           ) : (
-            <p className="text-gray-700">{userProfile.bio}</p>
+            <p className="text-gray-700 break-all">{userProfile.bio}</p>
           )}
         </div>
       }

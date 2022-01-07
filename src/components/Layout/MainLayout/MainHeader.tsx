@@ -150,9 +150,10 @@ const SearchBar = () => {
             <input
               id="search"
               name="search"
-              className="block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm disabled:opacity-40"
               placeholder="Search"
               type="search"
+              disabled
             />
           </div>
         </div>
@@ -162,15 +163,13 @@ const SearchBar = () => {
 };
 
 const HomeIconSection = () => {
+  const { user } = useAuth();
+
   return (
     <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
       <div className="flex-shrink-0 flex items-center">
-        <Link to="/">
-          <img
-            className="block h-8 w-auto"
-            src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-            alt="Dungeon Diaries"
-          />
+        <Link to={user ? '/app/feed' : '/'}>
+          <img className="block h-10 w-auto" src="/dd-favicon.png" alt="Dungeon Diaries" />
         </Link>
       </div>
     </div>

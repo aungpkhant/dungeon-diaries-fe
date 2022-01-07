@@ -12,6 +12,7 @@ import { useToggle } from '@/hooks/useToggle';
 import { AuthUser } from '@/features/auth';
 import { useUserProfile } from '../api/getUserProfile';
 import { useUpdateProfile } from '../api/updateProfile';
+import { XIcon, CheckIcon, PencilAltIcon } from '@heroicons/react/outline';
 
 const schema = z.object({
   bio: z.string().max(1000, 'Max length 1000 characters exceeded'),
@@ -57,18 +58,31 @@ const ProfileContainer = ({
           <header className="flex justify-between mb-4 items-end">
             <Heading>Profile</Heading>
             <Authorization policyCheck={POLICIES.owner(user, profileDetails?.id)}>
-              <div className="space-x-2">
+              <div className="flex items-end space-x-2 px-2 sm:px-0">
                 {isEditingProfile ? (
                   <>
-                    <Button variant="danger" onClick={handleCancelClick}>
+                    <Button
+                      variant="danger"
+                      onClick={handleCancelClick}
+                      startIcon={<XIcon className="h-4 w-4" />}
+                    >
                       Cancel
                     </Button>
-                    <Button isLoading={isLoading} type="submit">
+                    <Button
+                      isLoading={isLoading}
+                      type="submit"
+                      startIcon={<CheckIcon className="h-4 w-4" />}
+                    >
                       Save
                     </Button>
                   </>
                 ) : (
-                  <Button onClick={handleEditClick}>Edit</Button>
+                  <Button
+                    onClick={handleEditClick}
+                    startIcon={<PencilAltIcon className="h-4 w-4" />}
+                  >
+                    Edit
+                  </Button>
                 )}
               </div>
             </Authorization>

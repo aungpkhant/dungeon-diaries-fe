@@ -1,12 +1,14 @@
 import clsx from 'clsx';
-import { ShareIcon } from '@heroicons/react/solid';
+import { ClipboardIcon, ClipboardCheckIcon } from '@heroicons/react/solid';
 import { useNavigate } from 'react-router';
 import { SRLWrapper } from 'simple-react-lightbox';
+import useClipboard from 'react-use-clipboard';
 
 import { TPost } from '../../types';
 import { Button } from '@/components/Elements';
 import { PostAuthorMetaData } from './PostAuthorMetaData';
 import { PostActionBarLeft } from './PostActionBarLeft';
+import React from 'react';
 
 type PostProps = TPost & {
   isClickableLink?: boolean;
@@ -28,6 +30,9 @@ export const Post = ({
   isClickableLink = true,
 }: PostProps) => {
   const navigate = useNavigate();
+  const [isCopied, setCopied] = useClipboard(`${window.location.origin}/app/posts/${id}`, {
+    successDuration: 2000,
+  });
 
   const handleClick = isClickableLink
     ? () => {
@@ -35,6 +40,11 @@ export const Post = ({
       }
     : // eslint-disable-next-line @typescript-eslint/no-empty-function
       () => {};
+
+  const handleShareClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setCopied();
+  };
 
   return (
     <article
@@ -48,7 +58,7 @@ export const Post = ({
           author_profile_image={author_profile_image}
           created_at={created_at}
         />
-        <h2 className="mt-4 text-lg font-medium text-gray-900">{title}</h2>
+        <h2 className="mt-4 text-lg font-medium text-gray-900 break-all">{title}</h2>
       </div>
       {Boolean(image) && (
         <SRLWrapper>
@@ -66,7 +76,7 @@ export const Post = ({
         </SRLWrapper>
       )}
       <div className="mt-2 space-y-4">
-        <p className="text-gray-600 text-md whitespace-pre-wrap">{content}</p>
+        <p className="text-gray-600 text-md whitespace-pre-wrap break-all">{content}</p>
       </div>
       <div className="mt-6 flex justify-between">
         <PostActionBarLeft
@@ -76,8 +86,23 @@ export const Post = ({
           comment_count={comment_count}
         />
         <div className="flex text-sm">
-          <Button variant="ghost" startIcon={<ShareIcon className="h-5 w-5" aria-hidden="true" />}>
-            Share
+          <Button
+            variant="custom"
+            className={clsx(
+              isCopied
+                ? 'hover:text-green-600 text-green-500'
+                : 'text-gray-400 hover:text-indigo-500'
+            )}
+            startIcon={
+              isCopied ? (
+                <ClipboardCheckIcon className="h-5 w-5" aria-hidden="true" />
+              ) : (
+                <ClipboardIcon className="h-5 w-5" aria-hidden="true" />
+              )
+            }
+            onClick={handleShareClick}
+          >
+            {isCopied ? 'Copied' : 'Share'}
           </Button>
         </div>
       </div>

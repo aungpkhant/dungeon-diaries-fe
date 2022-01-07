@@ -57,7 +57,9 @@ export const Comment = ({ comment }: CommentProps) => {
       <div className="pl-10 relative">
         <span className="absolute left-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
         <div className=" mb-4 mt-2 ml-3">
-          <p className={clsx('text-gray-700', comment.deleted_at && 'italic')}>{comment.content}</p>
+          <p className={clsx('text-gray-700 break-all', comment.deleted_at && 'italic')}>
+            {comment.content}
+          </p>
           <CommentActionBar handleReplyButtonClick={toggleReplying} />
           {isReplying && (
             <CommentForm parentCommentId={comment.id} closeReplyTextBox={closeReplyTextBox} />
