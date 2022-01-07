@@ -32,8 +32,9 @@ export const Landing = () => {
                   <a href="#">
                     <span className="sr-only">Dungeon Diaries</span>
                     <img
-                      className="h-8 w-auto sm:h-10"
-                      src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                      className="block h-10 w-auto"
+                      src="/dd-favicon.png"
+                      alt="Dungeon Diaries"
                     />
                   </a>
                   <div className="ml-4">

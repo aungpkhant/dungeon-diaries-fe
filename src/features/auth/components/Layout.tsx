@@ -7,11 +7,7 @@ export const Layout = ({ header, children }: LayoutProps) => {
     <>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <img
-            className="mx-auto h-12 w-auto"
-            src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-            alt="Workflow"
-          />
+          <img className="mx-auto h-16 w-auto" src="/dd-favicon.png" alt="Dungeon Diaries" />
           {header}
         </div>
 
