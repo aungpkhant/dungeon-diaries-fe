@@ -4,6 +4,10 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
+    fontFamily: {
+      sans: ['Source Sans Pro', 'sans-serif'],
+      heading: ['Munro', 'sans-serif'],
+    },
   },
   variants: {
     extend: {
