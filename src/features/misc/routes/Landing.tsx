@@ -38,7 +38,9 @@ export const Landing = () => {
                     />
                   </a>
                   <div className="ml-4">
-                    <h1 className="text-indigo-600 font-bold text-2xl">Dungeon Diaries</h1>
+                    <h1 className="text-indigo-600 font-bold text-2xl font-heading">
+                      Dungeon Diaries
+                    </h1>
                   </div>
                 </div>
               </div>

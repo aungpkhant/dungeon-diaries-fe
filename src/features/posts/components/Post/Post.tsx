@@ -58,7 +58,7 @@ export const Post = ({
           author_profile_image={author_profile_image}
           created_at={created_at}
         />
-        <h2 className="mt-4 text-lg font-medium text-gray-900 break-all">{title}</h2>
+        <h3 className="mt-4 text-lg font-medium text-gray-900 break-all">{title}</h3>
       </div>
       {Boolean(image) && (
         <SRLWrapper>
