@@ -85,7 +85,7 @@ export const Profile = ({ userProfile, isEditingProfile }: ProfileProps) => {
             src={userProfile.profile_image ?? '/assets/default_profile.png'}
             onClick={handleProfileEditClick}
           />
-          {isUploading && <Spinner className="absolute right-3 bottom-3" />}
+          {isUploading && <Spinner className="absolute right-3 top-3" />}
           <input
             ref={profileImageUploadInputRef}
             type="file"
