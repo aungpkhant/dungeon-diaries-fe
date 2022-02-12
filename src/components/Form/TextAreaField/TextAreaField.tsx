@@ -3,9 +3,9 @@ import clsx from 'clsx';
 import { FieldError } from 'react-hook-form';
 
 const states = {
-  valid: 'border-gray-300 placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500',
+  valid: 'border-gray-700 placeholder-gray-400 focus:ring-yellow-500 focus:border-yellow-500',
   invalid:
-    'border-red-300 text-red-800 placeholder-red-300 focus:ring-red-500 focus:border-red-500',
+    'border-red-400 text-red-800 placeholder-red-300 focus:ring-red-500 focus:border-red-500',
 };
 
 export type TextAreaFieldProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
@@ -19,10 +19,10 @@ export const TextAreaField = React.forwardRef<HTMLTextAreaElement, TextAreaField
     return (
       <div>
         <label className="block text-sm font-medium text-gray-700">{label}</label>
-        <div className="mt-1">
+        <div className="mt-2">
           <textarea
             className={clsx(
-              'appearance-none block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm',
+              'border-4 appearance-none block w-full px-3 py-2 rounded-md shadow-sm focus:outline-none sm:text-sm',
               states[error?.message ? 'invalid' : 'valid'],
               className
             )}

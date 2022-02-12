@@ -186,7 +186,7 @@ export const MainHeader = () => {
       className={({ open }) =>
         clsx(
           open ? 'fixed inset-0 z-40 overflow-y-auto' : '',
-          'bg-white shadow-sm lg:static lg:overflow-y-visible'
+          'bg-white border-b-4 border-gray-700 lg:static lg:overflow-y-visible'
         )
       }
     >

@@ -63,7 +63,7 @@ export const CommentKebabMenu = ({ commentId }: { commentId: number }) => {
           content={'Are you sure you want to delete your comment?'}
           ActionButton={
             <Button
-              variant="primary"
+              variant="danger"
               isLoading={isLoading}
               onClick={() => mutate({ commentId }, { onSuccess: closeCommentDeleteDialog })}
             >
