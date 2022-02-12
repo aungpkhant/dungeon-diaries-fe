@@ -8,7 +8,7 @@ export function DesktopAsideRight() {
     <aside className="hidden xl:block xl:col-span-4">
       <div className="sticky top-4 space-y-4">
         <section aria-labelledby="who-to-follow-heading">
-          <div className="bg-white rounded-lg shadow">
+          <div className="bg-white border-4 border-gray-700">
             <div className="flex p-6">
               <div className="flex-shrink-0 flex items-center">
                 <img

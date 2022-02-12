@@ -8,19 +8,127 @@
   src: url('./assets/fonts/SourceSansPro-SemiBold.ttf');
 }
 
-.font-heading {
-  letter-spacing: 1px;
+.root,
+#root {
+  --gameboy--primary: #f7d51d;
+  --gameboy--secondary: #f2c409;
+  --gameboy--shadow: #e59400;
 }
 
 @layer base {
   h2 {
-    @apply font-heading;
+    @apply font-retro;
+  }
+}
+
+@layer components {
+  .retro-btn {
+    @apply text-gray-800 font-retro font-semibold;
+    position: relative;
+  }
+
+  .retro-btn::before,
+  .retro-btn::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-sizing: content-box;
+  }
+
+  .retro-btn::before {
+    left: 0;
+    border-top: 4px theme('colors.gray.700') solid;
+    border-bottom: 4px theme('colors.gray.700') solid;
+  }
+
+  .retro-btn::after {
+    left: -4px;
+    top: 0;
+    border-left: 4px theme('colors.gray.700') solid;
+    border-right: 4px theme('colors.gray.700') solid;
+  }
+
+  /* Retro Btn Primary */
+  .retro-btn--primary {
+    background-color: var(--gameboy--primary);
+    box-shadow: inset -4px -4px 0px 0px var(--gameboy--shadow);
+  }
+
+  .retro-btn--primary:hover {
+    background-color: var(--gameboy--secondary);
+    box-shadow: inset -5px -5px 0px 0px var(--gameboy--shadow);
+  }
+
+  .retro-btn--primary:focus {
+    background-color: var(--gameboy--secondary);
+  }
+
+  .retro-btn--primary:active {
+    box-shadow: inset 4px 4px 0px 0px var(--gameboy--shadow);
+  }
+
+  /* Retro Btn Secondary */
+  .retro-btn--secondary {
+    color: theme('colors.gray.800');
+    background-color: theme('colors.white');
+    box-shadow: inset -4px -4px 0px 0px theme('colors.gray.300');
+  }
+
+  .retro-btn--secondary:hover {
+    background-color: theme('colors.gray.100');
+    box-shadow: inset -5px -5px 0px 0px theme('colors.gray.300');
+  }
+
+  .retro-btn--secondary:focus {
+    background-color: theme('colors.gray.100');
+  }
+
+  .retro-btn--secondary:active {
+    box-shadow: inset 4px 4px 0px 0px theme('colors.gray.300');
+  }
+
+  /* Retro Btn Danger */
+  .retro-btn--danger {
+    color: theme('colors.white');
+    background-color: theme('colors.red.500');
+    box-shadow: inset -4px -4px 0px 0px theme('colors.red.700');
+  }
+
+  .retro-btn--danger:hover {
+    background-color: theme('colors.red.600');
+    box-shadow: inset -5px -5px 0px 0px theme('colors.red.700');
+  }
+
+  .retro-btn--danger:focus {
+    background-color: theme('colors.red.600');
+  }
+
+  .retro-btn--danger:active {
+    box-shadow: inset 4px 4px 0px 0px theme('colors.red.700');
+  }
+
+  .badge--primary {
+    @apply text-gray-700 inline-flex items-center font-bold;
+    background-color: var(--gameboy--primary);
+    box-shadow: 0 4px var(--gameboy--primary), 0 -4px var(--gameboy--primary),
+      5px 0 var(--gameboy--primary), -5px 0 #f7d51d;
+  }
+}
+
+@layer utilities {
+  .font-retro {
+    letter-spacing: 1px;
   }
 }
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* :root {
+  --outline-width: 6px;
+} */
 
 html,
 body,

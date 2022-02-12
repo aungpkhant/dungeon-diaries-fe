@@ -48,7 +48,10 @@ export const Post = ({
 
   return (
     <article
-      className={clsx('bg-white shadow sm:rounded-lg p-6', isClickableLink ? 'cursor-pointer' : '')}
+      className={clsx(
+        'bg-white border-4 border-gray-700 shadow p-6',
+        isClickableLink ? 'cursor-pointer' : ''
+      )}
       onClick={handleClick}
     >
       <div>

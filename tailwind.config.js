@@ -15,7 +15,7 @@ module.exports = {
     },
     fontFamily: {
       sans: ['Source Sans Pro', 'sans-serif'],
-      heading: ['Munro', 'sans-serif'],
+      retro: ['Munro', 'sans-serif'],
     },
   },
   plugins: [require('@tailwindcss/forms')],
