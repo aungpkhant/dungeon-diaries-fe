@@ -16,13 +16,13 @@ export const DesktopNavbarLeft = () => {
               to={item.to}
               className={({ isActive }) =>
                 clsx(
-                  isActive ? 'bg-indigo-100 text-indigo-800' : 'text-gray-600 hover:bg-gray-200',
-                  'group flex items-center px-3 py-2 text-sm font-medium rounded-md'
+                  isActive ? '' : '',
+                  'retro-btn retro-btn--secondary group flex items-center px-3 py-2 text-sm font-medium'
                 )
               }
             >
-              <item.icon className={clsx('flex-shrink-0 -ml-1 mr-3 h-6 w-6')} aria-hidden="true" />
-              <span className="truncate">{item.name}</span>
+              <item.icon className={clsx('flex-shrink-0 mr-3 h-6 w-6')} aria-hidden="true" />
+              <span>{item.name}</span>
             </NavLink>
           ))}
         </div>

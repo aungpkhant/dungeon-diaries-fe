@@ -40,7 +40,7 @@ export const Comment = ({ comment }: CommentProps) => {
                 {comment.author}
               </Link>
               <Authorization policyCheck={POLICIES['owner'](user, comment.author_id)}>
-                <span className="ml-2">
+                <span className="ml-3">
                   <Badge>Me</Badge>
                 </span>
               </Authorization>

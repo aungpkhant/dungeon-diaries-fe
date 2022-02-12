@@ -51,7 +51,7 @@ export const CommentForm = ({ parentCommentId = null, closeReplyTextBox }: Comme
         {...methods.register('content')}
         error={methods.formState.errors['content']}
       />
-      <div className="flex  justify-end pt-2">
+      <div className="flex  justify-end pt-4">
         <Button variant="primary" type="submit" isLoading={isLoading}>
           Publish
         </Button>

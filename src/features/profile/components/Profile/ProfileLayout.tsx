@@ -10,7 +10,7 @@ export const ProfileLayout = ({
   ProfileBottomComponent,
 }: ProfileLayoutProps) => {
   return (
-    <div className="bg-blue-50 shadow sm:rounded-lg min-h-[18.5rem]">
+    <div className="bg-blue-50 border-4 border-gray-700 min-h-[18.5rem]">
       <div className="bg-white relative">
         {ProfileLeftComponent}
         <div className="pl-[11rem] sm:pl-[15rem] pt-6 pb-4 pr-6">{ProfileTopComponent}</div>
