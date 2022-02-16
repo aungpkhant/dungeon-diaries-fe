@@ -5,10 +5,13 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
-  },
-  style: {
-    postcss: {
-      plugins: [require('tailwindcss'), require('autoprefixer')],
+    configure: {
+      resolve: {
+        fallback: {
+          stream: require.resolve('stream-browserify'),
+          crypto: require.resolve('crypto-browserify'),
+        },
+      },
     },
   },
 };

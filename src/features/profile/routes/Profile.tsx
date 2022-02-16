@@ -58,17 +58,19 @@ const ProfileContainer = ({
           <header className="flex justify-between mb-4 items-end">
             <Heading>Profile</Heading>
             <Authorization policyCheck={POLICIES.owner(user, profileDetails?.id)}>
-              <div className="flex items-end space-x-2 px-2 sm:px-0">
+              <div className="flex items-end space-x-4 px-2 sm:px-0">
                 {isEditingProfile ? (
                   <>
                     <Button
                       variant="danger"
+                      size="sm"
                       onClick={handleCancelClick}
                       startIcon={<XIcon className="h-4 w-4" />}
                     >
                       Cancel
                     </Button>
                     <Button
+                      size="sm"
                       isLoading={isLoading}
                       type="submit"
                       startIcon={<CheckIcon className="h-4 w-4" />}
@@ -78,6 +80,7 @@ const ProfileContainer = ({
                   </>
                 ) : (
                   <Button
+                    size="sm"
                     onClick={handleEditClick}
                     startIcon={<PencilAltIcon className="h-4 w-4" />}
                   >

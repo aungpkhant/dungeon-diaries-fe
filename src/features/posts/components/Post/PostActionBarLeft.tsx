@@ -53,7 +53,7 @@ export const PostActionBarLeft = ({
             handleVote(1);
           }}
         ></Button>
-        <span className="font-medium text-gray-900">{votes}</span>
+        <span className="font-retro font-semibold text-gray-900">{votes}</span>
         <Button
           variant="custom"
           size="custom"

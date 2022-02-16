@@ -23,7 +23,7 @@ const MobilePopoverPanel = () => {
             to={item.to}
             className={({ isActive }) =>
               clsx(
-                isActive ? 'bg-indigo-100 text-indigo-800' : 'text-gray-600 hover:bg-gray-200',
+                isActive ? 'bg-yellow-100 text-yellow-800' : 'text-gray-600 hover:bg-gray-200',
                 'group flex items-center px-3 py-2 text-sm font-medium rounded-md'
               )
             }
@@ -123,7 +123,7 @@ const MobileMenu = ({ open }: { open: boolean }) => {
   return (
     <div className="flex items-center md:absolute md:right-0 md:inset-y-0 lg:hidden">
       {/* Mobile menu button */}
-      <Popover.Button className="-mx-2 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+      <Popover.Button className="-mx-2 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-500">
         <span className="sr-only">Open menu</span>
         {open ? (
           <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -150,7 +150,7 @@ const SearchBar = () => {
             <input
               id="search"
               name="search"
-              className="block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm disabled:opacity-40"
+              className="block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm disabled:opacity-40"
               placeholder="Search"
               type="search"
               disabled
@@ -186,7 +186,7 @@ export const MainHeader = () => {
       className={({ open }) =>
         clsx(
           open ? 'fixed inset-0 z-40 overflow-y-auto' : '',
-          'bg-white shadow-sm lg:static lg:overflow-y-visible'
+          'bg-white  lg:static lg:overflow-y-visible'
         )
       }
     >
@@ -201,7 +201,7 @@ export const MainHeader = () => {
                 {/* Profile dropdown */}
                 <Menu as="div" className="flex-shrink-0 relative ml-5">
                   <div>
-                    <Menu.Button className="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <Menu.Button className="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full bg-gray-200"

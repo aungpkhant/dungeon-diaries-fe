@@ -36,7 +36,7 @@ export const PostAuthorMetaData = ({
             {author}
           </Link>
           <Authorization policyCheck={POLICIES.owner(user, author_id)}>
-            <span className="ml-2">
+            <span className="ml-3">
               <Badge>Me</Badge>
             </span>
           </Authorization>

@@ -48,7 +48,10 @@ export const Post = ({
 
   return (
     <article
-      className={clsx('bg-white shadow sm:rounded-lg p-6', isClickableLink ? 'cursor-pointer' : '')}
+      className={clsx(
+        'bg-white border-4 border-gray-700 shadow p-6',
+        isClickableLink ? 'cursor-pointer' : ''
+      )}
       onClick={handleClick}
     >
       <div>
@@ -58,7 +61,7 @@ export const Post = ({
           author_profile_image={author_profile_image}
           created_at={created_at}
         />
-        <h2 className="mt-4 text-lg font-medium text-gray-900 break-all">{title}</h2>
+        <h3 className="mt-4 text-lg font-medium text-gray-900 break-all">{title}</h3>
       </div>
       {Boolean(image) && (
         <SRLWrapper>

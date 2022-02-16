@@ -2,15 +2,15 @@ import clsx from 'clsx';
 import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom';
 
 const _types = {
-  link: 'text-indigo-600 hover:text-indigo-900',
+  link: 'text-yellow-500 hover:text-yellow-600 rounded-md',
   button:
-    'inline-flex items-center justify-center font-medium text-white bg-indigo-600 hover:bg-indigo-700 py-2 px-4 text-sm rounded-md',
+    'inline-flex items-center justify-center font-retro font-semibold retro-btn retro-btn--primary py-2 px-4 text-sm',
 };
 
 const sizes = {
-  sm: 'py-2 px-3 text-sm rounded-md',
-  md: 'py-2 px-4 text-sm rounded-md',
-  lg: 'py-3 px-6 text-md rounded-md',
+  sm: 'py-2 px-3 text-sm',
+  md: 'py-2 px-4 text-sm',
+  lg: 'py-3 px-6 text-md',
 };
 
 export type LinkProps = RouterLinkProps &
