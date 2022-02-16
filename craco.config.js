@@ -5,5 +5,8 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
+    resolve: {
+      fallback: { stream: require.resolve('stream-browserify') },
+    },
   },
 };
